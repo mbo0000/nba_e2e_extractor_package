@@ -15,7 +15,7 @@ Welcome to the NBA data extraction repository. This project will cover the Extra
 
 ## Code Design Patterns
 
-All entities in the NBA API follow a consistent pattern for data extraction, formatting, and uploading. Each entity, such as games or teams statistics, implements a standard set of methods and interfaces. When [main.py](insert url) is called externally, such as via Airflow, it determines which extractor subclass to use based on the provided arguments. During runtime, the behavior of each stage is encapsulated within individual subclasses.
+All entities in the NBA API follow a consistent pattern for data extraction, formatting, and uploading. Each entity, such as games or teams statistics, implements a standard set of methods and interfaces. When [main.py](https://github.com/mbo0000/nba_e2e_extractor_package/blob/main/main.py) is called externally, via Airflow, it determines which extractor subclass to use based on the provided arguments. During runtime, the behavior of each stage is encapsulated within individual subclasses.
 
 ## Installation
 
@@ -23,7 +23,7 @@ All entities in the NBA API follow a consistent pattern for data extraction, for
 
 - Python 3.10+
 - Snowflake Account
-    - Follow Snowflake config and management instruction [here](insert url)
+    - Follow Snowflake config and management instruction [here](https://github.com/mbo0000/nba_e2e_data_pipeline?tab=readme-ov-file#1-snowflake-management-and-config)
 - Apache Airflow (2.x recommended)
 - Docker
 - [NBA API](https://github.com/swar/nba_api/tree/master) package
@@ -44,7 +44,7 @@ All entities in the NBA API follow a consistent pattern for data extraction, for
     ```
     Replace 'foo' with your actual creds. 
 
-3. Create container and install dependencies:
+3. Build + create a Docker container:
     ```
     docker build -t nba_extractor_package .
     docker compose up -d
