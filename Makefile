@@ -12,7 +12,9 @@ up:
 down:
 	docker stop nba_extractor
 	docker rm nba_extractor
+	docker image rm nba_extractor_package
 
 build:
-	docker image rm nba_extractor_package
 	docker build -t nba_extractor_package:latest .
+
+start: build up
