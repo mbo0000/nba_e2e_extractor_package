@@ -53,7 +53,7 @@ All entities in the NBA API follow a consistent pattern for data extraction, for
 ## Usage
 1. Manual execution via Docker, using games entity as example:
     ```
-    docker exec -t extractor_package-app-1 /bin/bash
+    docker exec -it nba_extractor /bin/bash
     python main.py --entity games --database staging --schema nba_dump --table games
     ```
 2. tear down container:
