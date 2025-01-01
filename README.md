@@ -30,9 +30,10 @@ All entities in the NBA API follow a consistent pattern for data extraction, for
 
 ### Setup Steps
 
-1. Clone the repository:
+1. Clone the repository in your project directory:
     ```sh
     git clone https://github.com/mbo0000/nba_e2e_extractor_package
+    cd nba_e2e_extractor_package
 
 2. Create a `.env` file and provide credentials for Snowflake connection. Example: 
     ```
@@ -44,10 +45,9 @@ All entities in the NBA API follow a consistent pattern for data extraction, for
     ```
     Replace 'foo' with your actual creds. 
 
-3. Build + create a Docker container:
+3. Build + start a Docker container:
     ```
-    docker build -t nba_extractor_package .
-    docker compose up -d
+    make start
     ```
 
 ## Usage
@@ -56,4 +56,8 @@ All entities in the NBA API follow a consistent pattern for data extraction, for
     docker exec -t docker exec -t extractor_package-app-1 /bin/bash
 
     python main.py --entity games --database staging --schema nba_dump --table games
+    ```
+2. tear down container:
+    ```
+    make down
     ```
