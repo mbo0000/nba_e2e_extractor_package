@@ -2,7 +2,7 @@
 
 .PHONY: up down build
 
-up:
+start:
 	docker run -d \
 		--name nba_extractor \
 		--network airflow_default \
@@ -17,4 +17,4 @@ down:
 build:
 	docker build -t nba_extractor_package:latest .
 
-start: build up
+up: build start

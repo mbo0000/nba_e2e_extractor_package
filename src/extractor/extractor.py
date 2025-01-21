@@ -56,11 +56,12 @@ class Extractor:
 
     def _read_file(self, filename) -> pd.DataFrame:
         path    = self._get_path(filename) 
-        df      = pd.read_csv(path)
-
-        if filename == '' or df is None:
-            logging.ERROR('Missing file name or file does not exist.')
-            return pd.DataFrame()
+        
+        try:
+            df = pd.read_csv(path)
+        except:
+            logging.info('File does not exist')
+            df = None
 
         return df
 

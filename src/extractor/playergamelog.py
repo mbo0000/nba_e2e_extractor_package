@@ -2,6 +2,7 @@ from nba_api.stats.endpoints import playergamelog
 from .extractor import Extractor
 import pandas as pd
 import time
+import logging
 
 class PlayerGameStat(Extractor):
     
@@ -20,14 +21,22 @@ class PlayerGameStat(Extractor):
         res             = None
 
         for player_id, season_type in self.generate_params(players, self.season_types):
-            df          = playergamelog.PlayerGameLog(player_id=player_id, season_type_all_star=season_type).get_data_frames()[0]
-            df['ID']    =  df['Player_ID'].astype(str) + df['Game_ID'].astype(str)
-        
-            if res is None:
-                res     = df
-                continue
-                
-            res         = pd.concat([res, df])
-            time.sleep(1)
+            attempts = 3
+            while attempts > 0:
+                try:
+                    df          = playergamelog.PlayerGameLog(player_id=player_id, season_type_all_star=season_type).get_data_frames()[0]
+                    df['ID']    =  df['Player_ID'].astype(str) + df['Game_ID'].astype(str)
+
+                    if res is None:
+                        res     = df
+                    else:
+                        res     = pd.concat([res, df], ignore_index=True)
+                    
+                    break
+                except Exception as e:
+                    logging.info("Requests Error: ", e)
+                    attempts-=1
+                    time.sleep(1)
+            time.sleep(0.1)
 
         return res
